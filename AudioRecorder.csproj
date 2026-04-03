@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <AssemblyName>AudioRecorder</AssemblyName>
+    <RootNamespace>AudioRecorder</RootNamespace>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NAudio"              Version="2.2.1" />
+    <PackageReference Include="NAudio.Lame"          Version="2.1.0" />
+    <PackageReference Include="Whisper.net"          Version="1.7.2" />
+    <PackageReference Include="Whisper.net.Runtime"  Version="1.7.2" />
+    <PackageReference Include="System.Speech"         Version="8.0.0" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <!-- Nécessaire pour ApplicationSettingsBase / Properties.Settings -->
+    <FrameworkReference Include="Microsoft.WindowsDesktop.App.WPF" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Donne accès aux membres internal au projet de tests unitaires -->
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+      <_Parameter1>AudioRecorder.Tests</_Parameter1>
+    </AssemblyAttribute>
+  </ItemGroup>
+
+</Project>
