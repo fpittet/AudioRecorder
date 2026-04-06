@@ -363,9 +363,15 @@ MigrationBackup/
 FodyWeavers.xsd
 
 # AudioRecorder — fichiers locaux à exclure du dépôt
-temp/                  # WAV/MP3 intermédiaires (peuvent être très volumineux)
-dist/                  # Publication framework-dependent
-dist-sc/               # Publication self-contained
-activity_log.json      # Données locales utilisateur
-.claude/               # Paramètres locaux Claude Code
-appsettings.json       # Secrets (tokens API) — ne jamais versionner
+# WAV/MP3 intermédiaires (peuvent être très volumineux)
+temp/
+# Publication framework-dependent
+dist/
+# Publication self-contained
+dist-sc/
+# Données locales utilisateur
+activity_log.json
+# Paramètres locaux Claude Code
+.claude/
+# Secrets (tokens API) — ne jamais versionner
+appsettings.json
