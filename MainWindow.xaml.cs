@@ -388,8 +388,8 @@ namespace AudioRecorder
 
                 // — Étape 4 : fermer les fichiers WAV —
                 Exception? flushEx = null;
-                try { w1?.Flush(); w1?.Dispose(); } catch (Exception ex) { flushEx = ex; }
-                try { w2?.Flush(); w2?.Dispose(); } catch (Exception ex) { flushEx ??= ex; }
+                try { if (w1 != null) { await w1.FlushAsync(); await w1.DisposeAsync(); } } catch (Exception ex) { flushEx = ex; }
+                try { if (w2 != null) { await w2.FlushAsync(); await w2.DisposeAsync(); } } catch (Exception ex) { flushEx ??= ex; }
 
                 long sz1 = FileSizeBytes(_tempMicWavPath);
                 long sz2 = FileSizeBytes(_tempLoopWavPath);
