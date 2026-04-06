@@ -12,6 +12,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <!-- Exclure le projet de tests qui est dans un sous-dossier -->
+    <Compile Remove="AudioRecorder.Tests\**" />
+    <EmbeddedResource Remove="AudioRecorder.Tests\**" />
+    <None Remove="AudioRecorder.Tests\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="NAudio"              Version="2.2.1" />
     <PackageReference Include="NAudio.Lame"          Version="2.1.0" />
     <PackageReference Include="Whisper.net"          Version="1.7.2" />
