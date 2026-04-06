@@ -24,7 +24,9 @@ jobs:
         run: dotnet tool install --global dotnet-sonarscanner
 
       - name: Restore dependencies
-        run: dotnet restore AudioRecorder.csproj
+        run: |
+          dotnet restore AudioRecorder.csproj
+          dotnet restore ../AudioRecorder.Tests/AudioRecorder.Tests.csproj
 
       - name: Begin SonarCloud analysis
         env:
@@ -34,10 +36,22 @@ jobs:
             /k:"fpittet_AudioRecorder" `
             /o:"fpittet" `
             /d:sonar.token="${{ secrets.SONAR_TOKEN }}" `
-            /d:sonar.host.url="https://sonarcloud.io"
+            /d:sonar.host.url="https://sonarcloud.io" `
+            /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml" `
+            /d:sonar.exclusions="**/obj/**,**/bin/**"
 
       - name: Build
-        run: dotnet build AudioRecorder.csproj --no-restore
+        run: |
+          dotnet build AudioRecorder.csproj --no-restore
+          dotnet build ../AudioRecorder.Tests/AudioRecorder.Tests.csproj --no-restore
+
+      - name: Run tests with coverage
+        run: |
+          dotnet test ../AudioRecorder.Tests/AudioRecorder.Tests.csproj `
+            --no-build `
+            --collect:"XPlat Code Coverage" `
+            --results-directory ./coverage `
+            -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
 
       - name: End SonarCloud analysis
         env:
